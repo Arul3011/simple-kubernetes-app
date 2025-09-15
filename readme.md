@@ -37,15 +37,15 @@ kubectl create -f backend-pod.yaml
 ```
 # to check the pods
 ```
-kubctl get pods
+kubectl get pods
+```
+# backend service 
+```
+kubectl create -f backend-service.yaml
 ```
 # frontend service 
 ```
 kubectl create -f frontend-service.yaml
-```
-# frontend pod 
-```
-kubectl create -f backend-service.yaml
 ```
 # to check the services
 ```
@@ -64,4 +64,8 @@ kubectl get ingress
 NAME              CLASS   HOSTS   ADDRESS                          PORTS   AGE
 frontend-ingress  nginx   *       <your public domain name >  80      5m
 
+```
+# to change in pod (change in the yaml file )
+```
+kubectl apply -f <filename.ymal>
 ```
