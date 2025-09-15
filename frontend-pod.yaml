@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontendpod
+  labels: 
+    app: frontend
+spec:
+  containers:
+    - name: frontend
+      image: arul8406/frontend-img
+      ports:
+        - containerPort: 80
+      env:
+        - name: API_URL
+          value: "/api"          
