@@ -7,26 +7,32 @@ on:
   push:
     branches: [ "main" ]
 
-
-
-
 jobs:
-
-  build:
-    # The type of runner that the job will run on
+  check-gke:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Install gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: leaning-472416 
+          install_components: 'gke-gcloud-auth-plugin'
+
+      - name: Configure kubectl
+        run: gcloud container clusters get-credentials test-cluster  \
+              --zone us-central1-a \
+              --project leaning-472416 
+
+      - name: Verify cluster access
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          kubectl cluster-info
+          kubectl get nodes
+          kubectl get pods -A
