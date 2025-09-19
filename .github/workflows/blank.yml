@@ -31,6 +31,6 @@ jobs:
 
       - name: Verify cluster access
         run: |
-          kubectl cluster-info
-          kubectl get nodes
-          kubectl get pods -A
+          kubectl get pods
+          kubectl get svc
+          kubectl get ingress
