@@ -1,0 +1,15 @@
+name: Auto Merge PR
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto Merge PR
+        uses: tranvinh21/auto-merge-pr-action@v1
+        with:
+          token: ${{ secrets.AUTO_MERGE_PAT }}
+          merge-method: merge  # can also use squash or rebase
