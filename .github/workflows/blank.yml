@@ -14,22 +14,26 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+      - name : testlog
+        run : | 
+          echo "testing ..."
+          echo "done"
+        
+      # - name: Authenticate to GCP
+      #   uses: google-github-actions/auth@v2
+      #   with:
+      #     credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Authenticate to GCP
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      # - name: Install gcloud CLI
+      #   uses: google-github-actions/setup-gcloud@v2
+      #   with:
+      #     project_id: leaning-472416 
+      #     install_components: 'gke-gcloud-auth-plugin'
 
-      - name: Install gcloud CLI
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: leaning-472416 
-          install_components: 'gke-gcloud-auth-plugin'
+      # - name: Configure kubectl
+      #   run: gcloud container clusters get-credentials test-cluster  --zone us-central1-a --project leaning-472416 
 
-      - name: Configure kubectl
-        run: gcloud container clusters get-credentials test-cluster  --zone us-central1-a --project leaning-472416 
-
-      - name: Verify cluster access
+      # - name: Verify cluster access
         run: |
           kubectl set image deployments/frontend-deployment frontend=arul8406/frontend-img
           kubectl rollout status deployment/frontend-deployment
