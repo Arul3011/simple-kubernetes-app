@@ -8,6 +8,12 @@ jobs:
   auto-merge:
     runs-on: ubuntu-latest
     steps:
+      - name: Add automerge label
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.AUTO_MERGE_PAT }}
+          labels: automerge
+
       - name: Auto Merge PR
         uses: pascalgn/automerge-action@v0.16.4
         env:
