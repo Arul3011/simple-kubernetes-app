@@ -69,4 +69,3 @@ frontend-ingress  nginx   *       <your public domain name >  80      5m
 ```
 kubectl apply -f <filename.ymal>
 ```
-# testing
