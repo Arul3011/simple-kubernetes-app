@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Auto Merge PR
-        uses: tranvinh21/auto-merge-pr-action@v1
+        uses: pascalgn/automerge-action@v1
         with:
-          token: ${{ secrets.AUTO_MERGE_PAT }}
-          merge-method: merge  # can also use squash or rebase
+          github_token: ${{ secrets.AUTO_MERGE_PAT }}
+          merge_method: merge  # can be merge, squash, or rebase
