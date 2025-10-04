@@ -38,15 +38,15 @@ pipeline {
             }
         }
 
-        // stage('gck new image rollout'){
-        //     steps {
-        //         sh '''
-        //         kubectl set image deployment/frontend-deployment frontend=arul8406/jenkins-img:test
-        //         kubectl rollout status deployment/frontend-deployment
-        //         '''
-        //     }
+        stage('gck new image rollout'){
+            steps {
+                sh '''
+                kubectl set image deployment/frontend-deployment frontend=arul8406/jenkins-img:test
+                kubectl rollout status deployment/frontend-deployment
+                '''
+            }
 
-        // }
+        }
     }
 
     post {
