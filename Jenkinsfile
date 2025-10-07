@@ -33,15 +33,15 @@ pipeline {
             }
         }
 
-   stage('docker built and push'){ 
-    steps { 
-        sh ''' 
-        docker login -u arul8406 -p Arul301104@ 
-        docker build -t arul8406/jenkins-img:test . 
-        docker push arul8406/jenkins-img:test 
-        ''' 
-        }
-    }
+//    stage('docker built and push'){ 
+//     steps { 
+//         sh ''' 
+//         docker login -u arul8406 -p Arul301104@ 
+//         docker build -t arul8406/jenkins-img:test . 
+//         docker push arul8406/jenkins-img:test 
+//         ''' 
+//         }
+//     }
 
         stage('GKE Image Rollout') {
             steps {
@@ -50,7 +50,7 @@ pipeline {
                     kubectl get nodes
 
                     echo "Updating deployment image..."
-                    kubectl set image deployment/frontend-deployment frontend=arul8406/jenkins-img:test
+                    kubectl set image deployment/frontend-deployment frontend=nginx
 
                     echo "Waiting for rollout to complete..."
                     kubectl rollout status deployment/frontend-deployment
