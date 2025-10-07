@@ -5,10 +5,10 @@ pipeline {
         nodejs "NodeJS_20"
     }
 
-    environment {
-        // ✅ Use your working kubeconfig path
-        KUBECONFIG = '/home/yarul8406/.kube/config'
-    }
+ environment {
+    KUBECONFIG = '/var/lib/jenkins/.kube/config'
+}
+
 
     stages {
 
