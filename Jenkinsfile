@@ -43,20 +43,31 @@ pipeline {
 //         }
 //     }
 
-        stage('GKE Image Rollout') {
-            steps {
-                sh '''
-                    echo "Using kubeconfig at $KUBECONFIG"
-                    kubectl get nodes
+     stage('GKE Image Rollout') {
+    steps {
+        withCredentials([file(credentialsId: 'gcp-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+            sh '''
+                echo "🔐 Authenticating to Google Cloud..."
+                gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+                gcloud config set project your-project-id
+                gcloud config set compute/zone your-gke-zone   # e.g., us-central1-a
 
-                    echo "Updating deployment image..."
-                    kubectl set image deployment/frontend-deployment frontend=nginx
+                echo "⎈ Fetching GKE credentials..."
+                gcloud container clusters get-credentials your-gke-cluster-name
 
-                    echo "Waiting for rollout to complete..."
-                    kubectl rollout status deployment/frontend-deployment
-                '''
-            }
+                echo "✅ Checking cluster connectivity..."
+                kubectl get nodes
+
+                // echo "🚀 Updating deployment image..."
+                // kubectl set image deployment/frontend-deployment frontend=nginx
+
+                // echo "⏳ Waiting for rollout to complete..."
+                // kubectl rollout status deployment/frontend-deployment
+            '''
         }
+    }
+}
+
     }
 
     post {
