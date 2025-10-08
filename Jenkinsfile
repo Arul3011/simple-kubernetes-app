@@ -55,12 +55,12 @@ pipeline {
                 echo "✅ Checking cluster connectivity..."
                 kubectl get nodes
 
-                // echo "🚀 Updating deployment image..."
-                // kubectl set image deployment/frontend-deployment frontend=nginx
+                # echo "🚀 Updating deployment image..."
+                # kubectl set image deployment/frontend-deployment frontend=nginx
 
-                // echo "⏳ Waiting for rollout to complete..."
-                // kubectl rollout status deployment/frontend-deployment
-                //
+                # echo "⏳ Waiting for rollout to complete..."
+                # kubectl rollout status deployment/frontend-deployment
+                
             '''
         }
     }
