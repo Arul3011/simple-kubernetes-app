@@ -63,6 +63,7 @@ pipeline {
 
                 // echo "⏳ Waiting for rollout to complete..."
                 // kubectl rollout status deployment/frontend-deployment
+                //
             '''
         }
     }
