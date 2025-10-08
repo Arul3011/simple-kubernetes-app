@@ -49,11 +49,8 @@ pipeline {
             sh '''
                 echo "🔐 Authenticating to Google Cloud..."
                 gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-                gcloud config set project your-project-id
-                gcloud config set compute/zone your-gke-zone   # e.g., us-central1-a
-
-                echo "⎈ Fetching GKE credentials..."
-                gcloud container clusters get-credentials your-gke-cluster-name
+                gcloud config set project leaning-472416
+                gcloud config set compute/zone us-central1-a  
 
                 echo "✅ Checking cluster connectivity..."
                 kubectl get nodes
